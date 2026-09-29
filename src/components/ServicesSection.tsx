@@ -49,7 +49,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
         </div>
 
         {/* Category Filter Controls */}
-        <div className="flex items-center justify-start sm:justify-center border-b border-[#E8DDD7] mb-8 overflow-x-auto pb-1 gap-2 sm:gap-6 no-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center border-b border-[#E8DDD7] mb-8 overflow-x-auto pb-1 px-2 gap-2 sm:gap-6 no-scrollbar touch-pan-x">
           {categories.map((cat) => (
             <button
               key={cat.id}

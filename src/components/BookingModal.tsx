@@ -92,11 +92,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="booking-modal-title"
-      className="fixed inset-0 z-50 bg-[#252225]/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-[#252225]/85 backdrop-blur-sm overflow-y-auto flex items-start sm:items-center justify-center p-2.5 sm:p-5 animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg bg-[#FAF7F4] border border-[#E8DDD7] shadow-2xl p-5 sm:p-7 my-6 overflow-hidden flex flex-col"
+        className="relative w-full max-w-lg bg-[#FAF7F4] border border-[#E8DDD7] shadow-2xl p-4 sm:p-7 my-auto sm:my-6 overflow-hidden flex flex-col rounded-xs"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}

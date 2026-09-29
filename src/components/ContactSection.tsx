@@ -151,24 +151,24 @@ export const ContactSection: React.FC = () => {
                   className="w-full h-full"
                 />
                 
-                {/* Floating Map Marker Card */}
-                <div className="absolute top-3 left-3 z-10 bg-[#FAF7F4]/98 backdrop-blur-md px-3.5 py-2.5 border border-[#E8DDD7] shadow-lg max-w-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2.5 w-2.5">
+                {/* Floating Map Marker Card (Compact on mobile, non-blocking touch) */}
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 bg-[#FAF7F4]/98 backdrop-blur-md px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 border border-[#E8DDD7] shadow-lg max-w-[200px] sm:max-w-xs pointer-events-none">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C98F9D] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#542F3B]" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-[#542F3B]" />
                     </span>
-                    <span className="font-serif text-xs font-bold text-[#252225] uppercase tracking-wider">
+                    <span className="font-serif text-[11px] sm:text-xs font-bold text-[#252225] uppercase tracking-wider truncate">
                       BLOSSOM HAIR SPOT
                     </span>
-                    <span className="px-1 py-0.2 bg-[#252225] text-white text-[8px] font-bold uppercase tracking-wider">
+                    <span className="px-1 py-0.2 bg-[#252225] text-white text-[7px] sm:text-[8px] font-bold uppercase tracking-wider shrink-0">
                       LADIES
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#542F3B] font-medium mt-1">
-                    Beside Iscon Temple, Jawahar Nagar, Bhavnagar
+                  <p className="text-[10px] sm:text-[11px] text-[#542F3B] font-medium mt-0.5 sm:mt-1 truncate">
+                    Beside Iscon Temple, Bhavnagar
                   </p>
-                  <p className="text-[10px] text-[#252225]/60 mt-0.5">
+                  <p className="text-[9px] sm:text-[10px] text-[#252225]/60 mt-0.5 hidden sm:block">
                     Rated 5.0 ★ • Exclusively for Ladies
                   </p>
                 </div>

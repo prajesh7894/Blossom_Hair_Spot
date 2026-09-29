@@ -284,20 +284,20 @@ export const OfficialOffersSection: React.FC<OfficialOffersSectionProps> = ({ on
             </div>
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             <button
               onClick={handleBookSelected}
-              className="flex-1 sm:flex-none px-6 py-3 bg-[#542F3B] hover:bg-[#3B1F28] text-white text-xs uppercase tracking-[0.18em] font-semibold transition-colors flex items-center justify-center gap-2 min-h-[44px]"
+              className="w-full sm:w-auto px-6 py-3 bg-[#542F3B] hover:bg-[#3B1F28] active:scale-[0.98] text-white text-xs uppercase tracking-[0.16em] sm:tracking-[0.18em] font-semibold transition-all flex items-center justify-center gap-2 min-h-[46px]"
             >
-              <Calendar className="w-4 h-4 text-[#C98F9D]" />
+              <Calendar className="w-4 h-4 text-[#C98F9D] shrink-0" />
               <span>Book Appointment</span>
             </button>
 
             <button
               onClick={handleDirectWhatsAppSelected}
-              className="flex-1 sm:flex-none px-5 py-3 bg-[#25D366] hover:bg-[#128C7E] text-white text-xs uppercase tracking-[0.16em] font-semibold transition-colors flex items-center justify-center gap-2 min-h-[44px]"
+              className="w-full sm:w-auto px-5 py-3 bg-[#25D366] hover:bg-[#128C7E] active:scale-[0.98] text-white text-xs uppercase tracking-[0.16em] font-semibold transition-all flex items-center justify-center gap-2 min-h-[46px] shadow-sm"
             >
-              <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+              <MessageCircle className="w-4 h-4 fill-white text-[#25D366] shrink-0" />
               <span>WhatsApp Slot</span>
             </button>
           </div>

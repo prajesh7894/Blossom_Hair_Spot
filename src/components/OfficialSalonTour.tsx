@@ -52,8 +52,8 @@ export const OfficialSalonTour: React.FC = () => {
           </p>
         </div>
 
-        {/* Tab Controls */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 mb-8 overflow-x-auto pb-1">
+        {/* Tab Controls (Smoothly swipeable on mobile without cutting off) */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-4 mb-8 overflow-x-auto pb-2 px-2 no-scrollbar touch-pan-x">
           {tabs.map((tab) => (
             <button
               key={tab.id}

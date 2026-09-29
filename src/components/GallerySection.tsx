@@ -46,7 +46,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenBooking })
         </div>
 
         {/* Filter Navigation Tabs */}
-        <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 mb-8 overflow-x-auto pb-1 no-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 mb-8 overflow-x-auto pb-2 px-2 no-scrollbar touch-pan-x">
           {filters.map((f) => (
             <button
               key={f.id}
@@ -139,29 +139,29 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenBooking })
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#FAF7F4] border border-[#E8DDD7] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+            className="relative max-w-4xl w-full bg-[#FAF7F4] border border-[#E8DDD7] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[92svh] overflow-y-auto rounded-xs"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-3 right-3 z-20 p-2 bg-[#FAF7F4]/90 text-[#252225] hover:text-[#542F3B] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="absolute top-3 right-3 z-30 p-2 bg-[#FAF7F4]/90 text-[#252225] hover:text-[#542F3B] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shadow-xs"
               aria-label="Close Lightbox"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Lightbox Image */}
-            <div className="md:w-3/5 bg-[#252225] flex items-center justify-center overflow-hidden">
+            <div className="md:w-3/5 bg-[#252225] flex items-center justify-center overflow-hidden shrink-0">
               <img
                 src={selectedItem.imageUrl}
                 alt={selectedItem.title}
-                className="w-full h-full object-cover max-h-[50vh] md:max-h-[80vh]"
+                className="w-full h-full object-cover max-h-[35vh] sm:max-h-[50vh] md:max-h-[80vh]"
               />
             </div>
 
             {/* Lightbox Details */}
-            <div className="md:w-2/5 p-5 sm:p-6 flex flex-col justify-between overflow-y-auto">
+            <div className="md:w-2/5 p-4 sm:p-6 flex flex-col justify-between overflow-y-auto">
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-[#C98F9D] font-bold">
