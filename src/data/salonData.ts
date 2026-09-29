@@ -359,30 +359,103 @@ export const INSTAGRAM_POSTS = [
   },
 ];
 
-export function createWhatsAppBookingUrl(data: Partial<BookingFormData> = {}) {
-  const serviceName = data.service?.trim() || 'Salon Appointment';
-  const priceInfo = data.totalPrice ? ` (Estimated: ₹${data.totalPrice}/-)` : '';
+export function formatStraightDate(dateStr?: string): string {
+  if (!dateStr) return 'Next Available Date';
+  // If HTML date input format YYYY-MM-DD, convert to straight DD/MM/YYYY
+  const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (match) {
+    const [, year, month, day] = match;
+    return `${day}/${month}/${year}`;
+  }
+  return dateStr;
+}
+
+export function formatWhatsAppMessageText(data: Partial<BookingFormData> = {}): string {
+  // 1. If it's specifically a location / map enquiry:
+  if (data.notes && data.notes.toLowerCase().includes('location')) {
+    return [
+      `🌸 *BLOSSOM HAIR SPOT – FOR LADIES* 🌸`,
+      `📍 _Beside Iscon Temple, Jawahar Nagar, Bhavnagar_`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      ``,
+      `Hello Blossom Hair Spot Team! 👋✨`,
+      ``,
+      `I am planning to visit your salon and would love to get your exact Google Maps location & landmark directions.`,
+      ``,
+      `📍 *Request:* Live WhatsApp Location Pin & Directions`,
+      `⏰ *Salon Hours:* 9:00 AM – 9:00 PM (Open All 7 Days)`,
+      `🎀 *Branch:* Beside Iscon Temple, Sidsar Road, Bhavnagar`,
+      ``,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `Could you please share your live WhatsApp location pin? Thank you so much! 💕`,
+    ].join('\n');
+  }
+
+  // 2. If it's a general salon inquiry (empty form or general chat):
+  if (!data.fullName && (!data.service || data.service === 'General Inquiry' || data.service === 'Salon Appointment')) {
+    return [
+      `✨ *BLOSSOM HAIR SPOT – FOR LADIES* ✨`,
+      `🌸 _Luxury Ladies Hair & Beauty Studio • Bhavnagar_ 🌸`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      ``,
+      `Hello Blossom Team! 👋`,
+      ``,
+      `I would love to book a salon appointment at your Bhavnagar branch:`,
+      ``,
+      `✨ *Hot Deals Today:* Hair Cut ₹199 | Hair Spa ₹499 | D-Ten ₹99`,
+      `⏰ *Salon Timings:* 9:00 AM – 9:00 PM (All 7 Days)`,
+      `📍 *Location:* Beside Iscon Temple, Jawahar Nagar, Bhavnagar`,
+      `🔒 *Privacy:* 100% Exclusively For Ladies • Lady Staff Only`,
+      ``,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `Could you please share today's open slots and rate card details? Thank you! 💕`,
+    ].join('\n');
+  }
+
+  // 3. Detailed Appointment Booking Request:
+  const clientName = data.fullName?.trim() || 'A valued client';
+  const serviceName = data.service?.trim() || 'Hair & Beauty Care';
+  const priceDisplay = data.totalPrice ? ` (Est. ₹${data.totalPrice}/-)` : '';
+  const dateStr = formatStraightDate(data.preferredDate);
+  const timeStr = data.preferredTime ? data.preferredTime : 'Next Available Time';
 
   const lines = [
-    `🌸 *Blossom Hair Spot – For Ladies (Bhavnagar)* 🌸`,
-    `Hello Blossom Hair Spot!`,
+    `✨ *APPOINTMENT BOOKING REQUEST* ✨`,
+    `🌸 *BLOSSOM HAIR SPOT – FOR LADIES* 🌸`,
+    `📍 _Beside Iscon Temple, Jawahar Nagar, Bhavnagar_`,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━`,
     ``,
-    `I would like to book a salon appointment at your Bhavnagar branch:`,
+    `Hello Blossom Team! 👋`,
+    `I would like to book an appointment with your stylists:`,
     ``,
-    `• *Name:* ${data.fullName?.trim() || '[Please enter your name]'}`,
-    `• *Service/Offer:* ${serviceName}${priceInfo}`,
-    `• *Preferred Date:* ${data.preferredDate || '[Preferred Date]'}`,
-    `• *Preferred Time:* ${data.preferredTime || '[Preferred Time]'}`,
-    `• *Branch:* Beside Iscon Temple, Jawahar Nagar, Bhavnagar`,
+    `👤 *Client Name:* ${clientName}`,
+    `💇‍♀️ *Service / Package:* ${serviceName}${priceDisplay}`,
+    `🗓️ *Preferred Date:* ${dateStr}`,
+    `⏰ *Preferred Time:* ${timeStr}`,
+    `📍 *Salon Branch:* Beside Iscon Temple, Bhavnagar`,
   ];
 
+  if (data.phone && data.phone.trim()) {
+    lines.push(`📞 *Phone Number:* ${data.phone.trim()}`);
+  }
+
   if (data.notes && data.notes.trim()) {
-    lines.push(`• *Notes:* ${data.notes.trim()}`);
+    lines.push(``);
+    lines.push(`💬 *Special Request / Note:*`);
+    lines.push(`_${data.notes.trim()}_`);
   }
 
   lines.push(``);
-  lines.push(`Please confirm if this slot is available. Thank you!`);
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  lines.push(`✨ *Salon Hours:* 9:00 AM – 9:00 PM (All 7 Days)`);
+  lines.push(`🔒 *100% Only For Ladies • Complete Privacy*`);
+  lines.push(``);
+  lines.push(`Please confirm if this slot is available or suggest the nearest open time. Thank you so much! 💕`);
 
-  const message = lines.join('\n');
+  return lines.join('\n');
+}
+
+export function createWhatsAppBookingUrl(data: Partial<BookingFormData> = {}): string {
+  const message = formatWhatsAppMessageText(data);
   return `https://wa.me/${SALON_INFO.whatsappRaw}?text=${encodeURIComponent(message)}`;
 }
